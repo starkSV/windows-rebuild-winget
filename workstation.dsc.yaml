@@ -1,0 +1,738 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# Core config: Windows settings, dev tools, homelab access, everyday apps.
+# One-time setup:  winget configure --enable
+# Run from an elevated terminal:
+#   winget configure -f workstation.dsc.yaml --accept-configuration-agreements
+properties:
+  configurationVersion: 0.2.0
+  resources:
+
+    # ---------- Windows settings ----------
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      id: devMode
+      directives:
+        description: Enable Developer Mode
+        allowPrerelease: true
+        securityContext: elevated
+      settings:
+        Ensure: Present
+
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
+      id: explorer
+      directives:
+        description: Show file extensions and hidden files
+        allowPrerelease: true
+      settings:
+        FileExtensions: Show
+        HiddenFiles: Show
+        ItemCheckBoxes: Hide
+
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
+      id: darkMode
+      directives:
+        description: Dark mode for apps and system
+        allowPrerelease: true
+      settings:
+        Ensure: Present
+        RestartExplorer: true
+
+    # ---------- Dev: version control, editors, AI tools ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git_Git
+      directives:
+        description: Git
+        allowPrerelease: true
+      settings:
+        id: Git.Git
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GitHub_cli
+      dependsOn: [Git_Git]
+      directives:
+        description: GitHub CLI
+        allowPrerelease: true
+      settings:
+        id: GitHub.cli
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GitHub_GitHubDesktop
+      dependsOn: [Git_Git]
+      directives:
+        description: GitHub Desktop
+        allowPrerelease: true
+      settings:
+        id: GitHub.GitHubDesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Microsoft_VisualStudioCode
+      directives:
+        description: VS Code
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Anysphere_Cursor
+      directives:
+        description: Cursor
+        allowPrerelease: true
+      settings:
+        id: Anysphere.Cursor
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ZedIndustries_Zed
+      directives:
+        description: Zed
+        allowPrerelease: true
+      settings:
+        id: ZedIndustries.Zed
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Notepad___Notepad__
+      directives:
+        description: Notepad++
+        allowPrerelease: true
+      settings:
+        id: Notepad++.Notepad++
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Anthropic_Claude
+      directives:
+        description: Claude desktop
+        allowPrerelease: true
+      settings:
+        id: Anthropic.Claude
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: SST_OpenCodeDesktop
+      directives:
+        description: OpenCode Desktop
+        allowPrerelease: true
+      settings:
+        id: SST.OpenCodeDesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ollama_Ollama
+      directives:
+        description: Ollama
+        allowPrerelease: true
+      settings:
+        id: Ollama.Ollama
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ElementLabs_LMStudio
+      directives:
+        description: LM Studio
+        allowPrerelease: true
+      settings:
+        id: ElementLabs.LMStudio
+        source: winget
+
+    # ---------- Dev: runtimes and toolchains ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Microsoft_WindowsTerminal
+      directives:
+        description: Windows Terminal
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Microsoft_WSL
+      directives:
+        description: WSL
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WSL
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OpenJS_NodeJS_22
+      directives:
+        description: Node.js 22
+        allowPrerelease: true
+      settings:
+        id: OpenJS.NodeJS.22
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Python_Python_3_13
+      directives:
+        description: Python 3.13
+        allowPrerelease: true
+      settings:
+        id: Python.Python.3.13
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Python_Python_3_11
+      directives:
+        description: Python 3.11
+        allowPrerelease: true
+      settings:
+        id: Python.Python.3.11
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GoLang_Go
+      directives:
+        description: Go
+        allowPrerelease: true
+      settings:
+        id: GoLang.Go
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: EclipseAdoptium_Temurin_17_JDK
+      directives:
+        description: Temurin JDK 17
+        allowPrerelease: true
+      settings:
+        id: EclipseAdoptium.Temurin.17.JDK
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ArduinoSA_IDE_stable
+      directives:
+        description: Arduino IDE 2
+        allowPrerelease: true
+      settings:
+        id: ArduinoSA.IDE.stable
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Gyan_FFmpeg
+      directives:
+        description: FFmpeg
+        allowPrerelease: true
+      settings:
+        id: Gyan.FFmpeg
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Microsoft_WingetCreate
+      directives:
+        description: WingetCreate
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WingetCreate
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Docker_DockerDesktop
+      dependsOn: [Microsoft_WSL]
+      directives:
+        description: Docker Desktop (needs WSL2 and a reboot; may fail in a VM without nested virtualization)
+        allowPrerelease: true
+      settings:
+        id: Docker.DockerDesktop
+        source: winget
+
+    # ---------- Dev: databases and network tools ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PostgreSQL_PostgreSQL_17
+      directives:
+        description: PostgreSQL 17
+        allowPrerelease: true
+      settings:
+        id: PostgreSQL.PostgreSQL.17
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: HeidiSQL_HeidiSQL
+      directives:
+        description: HeidiSQL
+        allowPrerelease: true
+      settings:
+        id: HeidiSQL.HeidiSQL
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DBBrowserForSQLite_DBBrowserForSQLite
+      directives:
+        description: DB Browser for SQLite
+        allowPrerelease: true
+      settings:
+        id: DBBrowserForSQLite.DBBrowserForSQLite
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PuTTY_PuTTY
+      directives:
+        description: PuTTY
+        allowPrerelease: true
+      settings:
+        id: PuTTY.PuTTY
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Termius_Termius
+      directives:
+        description: Termius
+        allowPrerelease: true
+      settings:
+        id: Termius.Termius
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Rclone_Rclone
+      directives:
+        description: rclone
+        allowPrerelease: true
+      settings:
+        id: Rclone.Rclone
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: aria2_aria2
+      directives:
+        description: aria2
+        allowPrerelease: true
+      settings:
+        id: aria2.aria2
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ar51an_iPerf3
+      directives:
+        description: iPerf3
+        allowPrerelease: true
+      settings:
+        id: ar51an.iPerf3
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ylianst_MeshCommander
+      directives:
+        description: MeshCommander
+        allowPrerelease: true
+      settings:
+        id: Ylianst.MeshCommander
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WinFsp_WinFsp
+      directives:
+        description: WinFsp
+        allowPrerelease: true
+      settings:
+        id: WinFsp.WinFsp
+        source: winget
+
+    # ---------- Homelab access: VPN and remote ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Tailscale_Tailscale
+      directives:
+        description: Tailscale
+        allowPrerelease: true
+      settings:
+        id: Tailscale.Tailscale
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Netbird_Netbird
+      directives:
+        description: NetBird
+        allowPrerelease: true
+      settings:
+        id: Netbird.Netbird
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WireGuard_WireGuard
+      directives:
+        description: WireGuard
+        allowPrerelease: true
+      settings:
+        id: WireGuard.WireGuard
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ZeroTier_ZeroTierOne
+      directives:
+        description: ZeroTier
+        allowPrerelease: true
+      settings:
+        id: ZeroTier.ZeroTierOne
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Cloudflare_Warp
+      directives:
+        description: Cloudflare WARP
+        allowPrerelease: true
+      settings:
+        id: Cloudflare.Warp
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: AnyDesk_AnyDesk
+      directives:
+        description: AnyDesk
+        allowPrerelease: true
+      settings:
+        id: AnyDesk.AnyDesk
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Synology_DriveClient
+      directives:
+        description: Synology Drive Client
+        allowPrerelease: true
+      settings:
+        id: Synology.DriveClient
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Synology_Assistant
+      directives:
+        description: Synology Assistant
+        allowPrerelease: true
+      settings:
+        id: Synology.Assistant
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Nextcloud_NextcloudDesktop
+      directives:
+        description: Nextcloud
+        allowPrerelease: true
+      settings:
+        id: Nextcloud.NextcloudDesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Jellyfin_JellyfinMediaPlayer
+      directives:
+        description: Jellyfin Media Player
+        allowPrerelease: true
+      settings:
+        id: Jellyfin.JellyfinMediaPlayer
+        source: winget
+
+    # ---------- Everyday ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Microsoft_PowerToys
+      directives:
+        description: PowerToys
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 7zip_7zip
+      directives:
+        description: 7-Zip
+        allowPrerelease: true
+      settings:
+        id: 7zip.7zip
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: RARLab_WinRAR
+      directives:
+        description: WinRAR
+        allowPrerelease: true
+      settings:
+        id: RARLab.WinRAR
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: voidtools_Everything
+      directives:
+        description: Everything
+        allowPrerelease: true
+      settings:
+        id: voidtools.Everything
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ShareX_ShareX
+      directives:
+        description: ShareX
+        allowPrerelease: true
+      settings:
+        id: ShareX.ShareX
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: VideoLAN_VLC
+      directives:
+        description: VLC
+        allowPrerelease: true
+      settings:
+        id: VideoLAN.VLC
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: HandBrake_HandBrake
+      directives:
+        description: HandBrake
+        allowPrerelease: true
+      settings:
+        id: HandBrake.HandBrake
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OBSProject_OBSStudio
+      directives:
+        description: OBS Studio
+        allowPrerelease: true
+      settings:
+        id: OBSProject.OBSStudio
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Bitwarden_Bitwarden
+      directives:
+        description: Bitwarden
+        allowPrerelease: true
+      settings:
+        id: Bitwarden.Bitwarden
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Spotify_Spotify
+      directives:
+        description: Spotify
+        allowPrerelease: true
+      settings:
+        id: Spotify.Spotify
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: AppWork_JDownloader
+      directives:
+        description: JDownloader
+        allowPrerelease: true
+      settings:
+        id: AppWork.JDownloader
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Mozilla_Thunderbird_en_GB
+      directives:
+        description: Thunderbird
+        allowPrerelease: true
+      settings:
+        id: Mozilla.Thunderbird.en-GB
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Asana_Asana
+      directives:
+        description: Asana
+        allowPrerelease: true
+      settings:
+        id: Asana.Asana
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Google_GoogleDrive
+      directives:
+        description: Google Drive
+        allowPrerelease: true
+      settings:
+        id: Google.GoogleDrive
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Canva_Affinity
+      directives:
+        description: Affinity
+        allowPrerelease: true
+      settings:
+        id: Canva.Affinity
+        source: winget
+
+    # ---------- Browsers, chat, and tools installed outside winget on the old PC ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Google_Chrome
+      directives:
+        description: Google Chrome
+        allowPrerelease: true
+      settings:
+        id: Google.Chrome
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Brave_Brave
+      directives:
+        description: Brave
+        allowPrerelease: true
+      settings:
+        id: Brave.Brave
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Vivaldi_Vivaldi
+      directives:
+        description: Vivaldi
+        allowPrerelease: true
+      settings:
+        id: Vivaldi.Vivaldi
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Discord_Discord
+      directives:
+        description: Discord
+        allowPrerelease: true
+      settings:
+        id: Discord.Discord
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: SlackTechnologies_Slack
+      directives:
+        description: Slack
+        allowPrerelease: true
+      settings:
+        id: SlackTechnologies.Slack
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Postman_Postman
+      directives:
+        description: Postman
+        allowPrerelease: true
+      settings:
+        id: Postman.Postman
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WinSCP_WinSCP
+      directives:
+        description: WinSCP
+        allowPrerelease: true
+      settings:
+        id: WinSCP.WinSCP
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: TimKosse_FileZilla_Client
+      directives:
+        description: FileZilla
+        allowPrerelease: true
+      settings:
+        id: TimKosse.FileZilla.Client
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Vim_Vim
+      directives:
+        description: Vim
+        allowPrerelease: true
+      settings:
+        id: Vim.Vim
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Google_AndroidStudio
+      directives:
+        description: Android Studio
+        allowPrerelease: true
+      settings:
+        id: Google.AndroidStudio
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ApacheFriends_Xampp_8_2
+      directives:
+        description: XAMPP
+        allowPrerelease: true
+      settings:
+        id: ApacheFriends.Xampp.8.2
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: VMware_WorkstationPro
+      directives:
+        description: VMware Workstation
+        allowPrerelease: true
+      settings:
+        id: VMware.WorkstationPro
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: CrystalDewWorld_CrystalDiskInfo
+      directives:
+        description: CrystalDiskInfo
+        allowPrerelease: true
+      settings:
+        id: CrystalDewWorld.CrystalDiskInfo
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: JAMSoftware_TreeSize_Free
+      directives:
+        description: TreeSize Free
+        allowPrerelease: true
+      settings:
+        id: JAMSoftware.TreeSize.Free
+        source: winget
+
+    # ---------- Windows UI tweaks ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: valinet_ExplorerPatcher
+      directives:
+        description: ExplorerPatcher
+        allowPrerelease: true
+      settings:
+        id: valinet.ExplorerPatcher
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: RamenSoftware_Windhawk
+      directives:
+        description: Windhawk
+        allowPrerelease: true
+      settings:
+        id: RamenSoftware.Windhawk
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ModernFlyouts_ModernFlyouts
+      directives:
+        description: ModernFlyouts
+        allowPrerelease: true
+      settings:
+        id: ModernFlyouts.ModernFlyouts
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: w4po_ExplorerTabUtility
+      directives:
+        description: Explorer Tab Utility
+        allowPrerelease: true
+      settings:
+        id: w4po.ExplorerTabUtility
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Seelen_SeelenUI
+      directives:
+        description: Seelen UI
+        allowPrerelease: true
+      settings:
+        id: Seelen.SeelenUI
+        source: winget

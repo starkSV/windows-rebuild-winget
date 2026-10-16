@@ -1,0 +1,240 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# Extras: hardware tools, peripherals, game launchers, flight sim tooling.
+# Skip this file on machines without the matching hardware.
+# One-time setup:  winget configure --enable
+# Run from an elevated terminal:
+#   winget configure -f workstation-extras.dsc.yaml --accept-configuration-agreements
+properties:
+  configurationVersion: 0.2.0
+  resources:
+
+    # ---------- Hardware monitoring and utilities ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: REALiX_HWiNFO
+      directives:
+        description: HWiNFO
+        allowPrerelease: true
+      settings:
+        id: REALiX.HWiNFO
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: TechPowerUp_GPU_Z
+      directives:
+        description: GPU-Z
+        allowPrerelease: true
+      settings:
+        id: TechPowerUp.GPU-Z
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Wagnardsoft_DisplayDriverUninstaller
+      directives:
+        description: DDU
+        allowPrerelease: true
+      settings:
+        id: Wagnardsoft.DisplayDriverUninstaller
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Rem0o_FanControl
+      directives:
+        description: FanControl
+        allowPrerelease: true
+      settings:
+        id: Rem0o.FanControl
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: SanDisk_Dashboard
+      directives:
+        description: SanDisk Dashboard
+        allowPrerelease: true
+      settings:
+        id: SanDisk.Dashboard
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: NetSpot_NetSpot
+      directives:
+        description: NetSpot
+        allowPrerelease: true
+      settings:
+        id: NetSpot.NetSpot
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Logitech_GHUB
+      directives:
+        description: Logitech G HUB
+        allowPrerelease: true
+      settings:
+        id: Logitech.GHUB
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Logitech_OptionsPlus
+      directives:
+        description: Logi Options+
+        allowPrerelease: true
+      settings:
+        id: Logitech.OptionsPlus
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Corsair_iCUE_5
+      directives:
+        description: Corsair iCUE 5
+        allowPrerelease: true
+      settings:
+        id: Corsair.iCUE.5
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Elgato_StreamDeck
+      directives:
+        description: Stream Deck
+        allowPrerelease: true
+      settings:
+        id: Elgato.StreamDeck
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: e2eSoft_iVCam
+      directives:
+        description: iVCam
+        allowPrerelease: true
+      settings:
+        id: e2eSoft.iVCam
+        source: winget
+
+    # ---------- Game launchers ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Valve_Steam
+      directives:
+        description: Steam
+        allowPrerelease: true
+      settings:
+        id: Valve.Steam
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: EpicGames_EpicGamesLauncher
+      directives:
+        description: Epic Games Launcher
+        allowPrerelease: true
+      settings:
+        id: EpicGames.EpicGamesLauncher
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GOG_Galaxy
+      directives:
+        description: GOG Galaxy
+        allowPrerelease: true
+      settings:
+        id: GOG.Galaxy
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ElectronicArts_EADesktop
+      directives:
+        description: EA app
+        allowPrerelease: true
+      settings:
+        id: ElectronicArts.EADesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ubisoft_Connect
+      directives:
+        description: Ubisoft Connect
+        allowPrerelease: true
+      settings:
+        id: Ubisoft.Connect
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: RockstarGames_Launcher
+      directives:
+        description: Rockstar Games Launcher
+        allowPrerelease: true
+      settings:
+        id: RockstarGames.Launcher
+        source: winget
+
+    # ---------- Flight sim tooling ----------
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Navigraph_NavigraphHub
+      directives:
+        description: Navigraph Hub
+        allowPrerelease: true
+      settings:
+        id: Navigraph.NavigraphHub
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OrbxSimulationSystems_Volanta
+      directives:
+        description: Volanta
+        allowPrerelease: true
+      settings:
+        id: OrbxSimulationSystems.Volanta
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: OrbxSimulationSystems_OrbxCentral
+      directives:
+        description: Orbx Central
+        allowPrerelease: true
+      settings:
+        id: OrbxSimulationSystems.OrbxCentral
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: FlyByWireSimulations_FlyByWireSimulationsInstaller
+      directives:
+        description: FlyByWire installer
+        allowPrerelease: true
+      settings:
+        id: FlyByWireSimulations.FlyByWireSimulationsInstaller
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Headwindsim_HeadwindInstaller
+      directives:
+        description: Headwind installer
+        allowPrerelease: true
+      settings:
+        id: Headwindsim.HeadwindInstaller
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: iniBuilds_iniManager
+      directives:
+        description: iniManager
+        allowPrerelease: true
+      settings:
+        id: iniBuilds.iniManager
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: BeyondATC_Client_EarlyAccess
+      directives:
+        description: BeyondATC
+        allowPrerelease: true
+      settings:
+        id: BeyondATC.Client.EarlyAccess
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: starkSV_msdl
+      directives:
+        description: MSDL
+        allowPrerelease: true
+      settings:
+        id: starkSV.msdl
+        source: winget
